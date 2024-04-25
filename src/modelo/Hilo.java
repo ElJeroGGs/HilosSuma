@@ -10,6 +10,7 @@ public class Hilo extends Thread{
     private int numero2;
     private int resultado;
     private int id;
+    private int posicion;
 
     private ControladorPrincipal controlador;
 
@@ -29,7 +30,7 @@ public class Hilo extends Thread{
         this.resultado = this.numero1 + this.numero2;
         //Mandan ese resultado a el nuevo vector
 
-        this.controlador.agregarResultado(resultado, this.id);
+        this.controlador.agregarResultado(resultado, this.posicion);
     }
 
 
@@ -51,6 +52,10 @@ public class Hilo extends Thread{
     public void setNumero2(int i) {
 
         this.numero2 = i;
+    }
+
+    public void setposicion(int i) {
+        this.posicion = i;
     }
 
 }

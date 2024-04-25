@@ -11,7 +11,8 @@ public class VistaPrincipal {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("¿De que tamaño quieres tu vector?");
-        this.tamaño = sc.nextInt();
+        int scan = sc.nextInt();
+        this.tamaño = scan;
     }
 
     public int getTamaño() {

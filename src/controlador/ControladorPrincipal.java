@@ -17,11 +17,10 @@ public class ControladorPrincipal {
     }
 
     public void iniciar() {
-        System.out.println("El tamaño del vector es: " + vista.getTamaño());
         // Llena el vector con numeros aleatorios
         Vector Vec = new modelo.Vector(vista.getTamaño());
         Vec.llenarVector();
-
+        this.vector = Vec;
         Suma(Vec);
         
 
@@ -38,22 +37,32 @@ public class ControladorPrincipal {
         for(int i = 1; i <= SizeNewVector; i++){
             
             Hilo hilo = new Hilo(i);
+            hilo.setposicion(i*2-2);
+            
             if(i<SizeNewVector){
             
             hilo.setControlador(this);
+            int pos = (i*2)-2;
 
-            hilo.setNumero1(vec.getVector()[(i*2)-2]);
-            hilo.setNumero2(vec.getVector()[(i*2)-1]);
+            int posi = vec.getPosition(pos);
+            int posi2 = vec.getPosition(pos+1);
+
+            hilo.setNumero1(vec.getVector()[posi]);
+            
+            hilo.setNumero2(vec.getVector()[posi2]);
 
             } else{
 
               hilo = new Hilo(i);
                 hilo.setControlador(this);
-
-                hilo.setNumero1(vec.getVector()[(i*2)-2]);
-
-                if(vec.getVector().length%2==0){
-                hilo.setNumero2(vec.getVector()[(i*2)-1]);
+                int pos = (i*2)-2;
+                int posi = vec.getPosition(pos);
+                
+                hilo.setNumero1(vec.getVector()[posi]);
+                hilo.setposicion(i*2-2);
+                if(vec.getTamaño()%2==0){
+                int posi2 = vec.getPosition(pos+1);
+                hilo.setNumero2(vec.getVector()[posi2]);
                 }else{
                 hilo.setNumero2(0);
                 }
@@ -83,13 +92,17 @@ public class ControladorPrincipal {
 
     public void CreaVector(){
         
-        vector = new Vector(SizeNewVector);
+        vector = new Vector(vista.getTamaño());
     }
     
+    public int obtenerPosicion(int posicion) {
 
-    public void agregarResultado(int resultado, int turno) {
+       return vector.getPosition(posicion);
+    }
 
-        vector.agregarResultado(resultado, turno);
+    public void agregarResultado(int resultado, int posicion) {
+
+        vector.agregarResultado(resultado, posicion);
     }
 
 }
